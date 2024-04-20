@@ -1,0 +1,54 @@
+		
+		;Quero	somar o que está no registrador 1 com o valor 255 e adicionar o resultado em r1:
+		
+		
+		;add		r3, r1, #0xff
+		
+		;o		primeiro registrador é sempre o de destino
+		;Na		instruçaõ de somar, os operandos podem ser outros registradores mas o segundo operando pode ser  "imediato"
+
+		;-------------------------------------------------------------------------------------------------------------
+		;COMO	FAZER ATRIBUIÇÕES:
+		;EX		em C: a=6;
+		;A		instrução MOV ->> move valores de uma fonte para um destino
+		;Destino	é registrador fonte é um outro registrador ou imediato(número)
+		
+		
+		;mov		r1, #0x6
+		
+		;---------------------------------------------------------------------------------------------
+		;Se		eu quiser -->> a = b+c: supondo que b é r2(sendo = 6) e c é r3(sendo = 2)
+		
+		
+		;mov		r2, #0x6
+		;mov		r3, #0x2
+		;add		r1, r2, r3
+		
+		;--------------------------------------------------------------------------------------------
+		;Se		eu quiser fazer a=b+c-d: supondo d é r4
+		
+		
+		;mov		r2, #0x6
+		;mov		r3, #0x2
+		;mov		r4, #0x6
+		;add		r1, r2, r3
+		;sub		r1, r1, r4 ; subtração
+		
+		;-------------------------------------------------------------------------------------------
+		;Se		eu quiser fazer : f = (g+h) - (i+j)
+		
+		
+		;r0		=f , r1 = g, r2 = h, r3 = i, r4 = j.
+		mov		r1, #0x1
+		mov		r2, #0x2
+		mov		r3, #0x3
+		mov		r4, #0x4
+		
+		add		r5, r1,r2
+		add		r6, r3, r4
+		
+		sub		r0, r5, r6
+
+
+
+		
