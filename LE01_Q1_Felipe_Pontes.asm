@@ -1,24 +1,48 @@
-		;Quest„o	1 feita por Felipe Pontes.
+		;Quest√£o	1 feita por Felipe Pontes.
 		
-		;ï		carregue os valores {0x12, 0x12AB, 0x12AB34 , 0x12AB34CD} nos registradores R0 ao R3, respectivamente;
-		;ï		ApÛs isso, salve esses registradores R0 ao R3 na memÛria de dados nos endereÁos 0x100 ao 0x10C, respectivamente;
-		;ï		Por fim, leia e memÛria de dados e salve nos registradores R8 ao R11.
+		;‚Ä¢		carregue os valores {0x12, 0x12AB, 0x12AB34 , 0x12AB34CD} nos registradores R0 ao R3, respectivamente;
+		;‚Ä¢		Ap√≥s isso, salve esses registradores R0 ao R3 na mem√≥ria de dados nos endere√ßos 0x100 ao 0x10C, respectivamente;
+		;‚Ä¢		Por fim, leia e mem√≥ria de dados e salve nos registradores R8 ao R11.
 		
-		;		Carregar valores nos registradores
+				;	-----	Carregar valores divididos em registradores usando LSL, ADD e MOV------
 		
-		mov		R0, #0x12  ; Carregar 0x12 em R0
-		mov		R1, #0x12AB ; Carregar 0x12AB em R1
-		mov		R2, #0x12AB34 ; Carregar 0x12AB34 em R2
-		mov		R3, #0x12AB34CD ; Carregar 0x12AB34CD em R3
+		;		Carregar 0x12 em R0 e R1 (dividido em duas partes de 8 bits)
+		mov		R0, #0x00
+		mov		R1, #0x12
 		
-		;		Salvar valores na memÛria de dados
+		;		Carregar 0x12AB em R2 e R3 (dividido em duas partes de 8 bits)
+		mov		R2, #0x00
+		mov		R3, #0x12
+		lsl		R3, R3, #8      ;  Desloca R3 8 bits para a esquerda
+		add		R3, R3, #0xAB   ; Adiciona 0xAB a R3
+		
+		;		Carregar 0x12AB34 em R2 e R3 (dividido em duas partes de 8 bits)
+		mov		R1, R3          ; copia valor de R3 para R1
+		mov		R2, R3          ; Copia valor de R3 para R2
+		lsl		R2, R2, #8      ;  Desloca R2 8 bits para a esquerda
+		add		R2, R2, #0x34   ; Adiciona 0x34 a R2
+		mov		R3, #0x00
+		add		R3, R3, R1      ; Adiciona R1 a R3
+		
+		;		Carregar 0x12AB34CD em R3 (dividido em duas partes de 8 bits)
+		mov		R2, R3          ; copia valor de R3 para R2
+		lsl		R2, R2, #8      ; Desloca R2 8 bits para a esquerda
+		add		R2, R2, #0xCD   ; Adiciona 0xCD a R2
+		mov		R3, #0x00
+		add		R3, R3, R2      ; Adiciona R2 a R3
+		SUB		R2, R3, #0XCD		; EU FIZ NA IGNOR√ÇNCIA POIS J√Å ESTAVA SEM PACIENCIA KKK
+		ADD		R2, R2, #0X34
+		
+		
+		
+		;		Salvar valores na mem√≥ria de dados
 		
 		str		R0, [R0, #0x100] ; Salvar R0 em 0x100
 		str		R1, [R1, #0x104] ; Salvar R1 em 0x104
 		str		R2, [R2, #0x108] ; Salvar R2 em 0x108
 		str		R3, [R3, #0x10C] ; Salvar R3 em 0x10C
 		
-		;		Ler valores da memÛria de dados e salvar nos registradores
+		;		Ler valores da mem√≥ria de dados e salvar nos registradores
 		
 		ldr		R8,  [R8, #0x100] ; Ler 0x100 em R8
 		ldr		R9,  [R9, #0x104] ; Ler 0x104 em R9
@@ -26,4 +50,4 @@
 		ldr		R11,  [R11, #0x10C] ; Ler 0x10C em R11
 		
 		
-		;MINHA	D⁄VIDA … ESSE ERRO QUE EST¡ ACONTECENDO NA LINHA 10
+		;MINHA	D√öVIDA √â ESSE ERRO QUE EST√Å ACONTECENDO NA LINHA 10
