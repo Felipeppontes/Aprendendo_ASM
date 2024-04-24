@@ -4,7 +4,7 @@
 		;•		Após isso, salve esses registradores R0 ao R3 na memória de dados nos endereços 0x100 ao 0x10C, respectivamente;
 		;•		Por fim, leia e memória de dados e salve nos registradores R8 ao R11.
 		
-				;	-----	Carregar valores divididos em registradores usando LSL, ADD e MOV------
+			;		Carregar valores divididos em registradores usando LSL, ADD e MOV
 		
 		;		Carregar 0x12 em R0 e R1 (dividido em duas partes de 8 bits)
 		mov		R0, #0x00
@@ -32,15 +32,22 @@
 		add		R3, R3, R2      ; Adiciona R2 a R3
 		SUB		R2, R3, #0XCD		; EU FIZ NA IGNORÂNCIA POIS JÁ ESTAVA SEM PACIENCIA KKK
 		ADD		R2, R2, #0X34
-		
+		mov		R0, #0x12
 		
 		
 		;		Salvar valores na memória de dados
+		ldr		R4, =0x100 ; Carregar endereço inicial da memória de dados em R4
 		
-		str		R0, [R0, #0x100] ; Salvar R0 em 0x100
-		str		R1, [R1, #0x104] ; Salvar R1 em 0x104
-		str		R2, [R2, #0x108] ; Salvar R2 em 0x108
-		str		R3, [R3, #0x10C] ; Salvar R3 em 0x10C
+		str		R0, [R4] ; Salvar R0 em 0x100
+		add		R4, R4, #4 ; Incrementar o ponteiro de memória em 4 bytes
+		str		R1, [R4] ; Salvar R1 em 0x104
+		add		R4, R4, #4 ; Incrementar o ponteiro de memória em 4 bytes
+		str		R2, [R4] ; Salvar R2 em 0x108
+		add		R4, R4, #4 ; Incrementar o ponteiro de memória em 4 bytes
+		str		R3, [R4] ; Salvar R3 em 0x10C
+		
+		
+	
 		
 		;		Ler valores da memória de dados e salvar nos registradores
 		
@@ -50,4 +57,3 @@
 		ldr		R11,  [R11, #0x10C] ; Ler 0x10C em R11
 		
 		
-		;MINHA	DÚVIDA É ESSE ERRO QUE ESTÁ ACONTECENDO NA LINHA 10
