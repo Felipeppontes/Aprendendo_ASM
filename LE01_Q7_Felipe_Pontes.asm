@@ -1,39 +1,41 @@
-			;-----------------------	QUET√O 7 -------------------
-			;[FELIPE	PONTES] - - - - - 29/04/2024
-			;================================================================================================================================
-			;Q07)	7. Implemente o algoritmo de Euclides para calcular o MDC entre dois n˙meros inteiros m e n, em que 0 ? n < m, cuja uma implementaÁ„o em C^2:
-			;		/ / Para c a l c u l a r o mdc (m, n ) para 0 <= n < m
-			;i		n t e u c l i d e s _ m d c ( i n t m, i n t n )
-			;		{
-			;		if ( n ==0){
-			;
-			;		r e t u r n m;
-			;}
-			;		r e t u r n   e u c l i d e s _ m d c ( n , m % n ) ;
-			;}
-			;e		salve o resultado na memÛria de dados.
-			;==================================================================================================================================================
-			
-			
-			;		Carregar valores iniciais
-			mov		R0, #0x100 ; EndereÁo inicial da memÛria de dados
-			mov		R1, #10    ; N˙mero m (por exemplo: 15)
-			mov		R2, #5     ; N˙mero n (por exemplo: 5)
-			mov		R3, #0     ; Vari·vel auxiliar
-			
-euclides
-			;		Comparar n com zero
-			cmp		R2, #0
-			beq		fim_euclides ; Se n = 0, ir para o fim do algoritmo
-			
-			;		Substituir n por m % n
-			mov		R3, R1     ; Salvar m em R3
-			sub		R1, R1, R2 ; m = m - n
-			mov		R2, R3     ; n = m (salvo em R3)
-			
-			;		Binar para o inÌcio do loop
-			b		euclides
-			
-fim_euclides
-			;		Salvar MDC (n) na memÛria de dados
-			str		R2, [R0] ; Salvar o MDC em 0x100
+		;-----------------------	QUET√ÉO 7 -------------------
+		;[FELIPE	PONTES] - - - - - 29/04/2024
+		;================================================================================================================================
+		;Q07)	7. Implemente o algoritmo de Euclides para calcular o MDC entre dois n√∫meros inteiros m e n, em que 0 ? n < m, cuja uma implementa√ß√£o em C^2:
+		;		/ / Para c a l c u l a r o mdc (m, n ) para 0 <= n < m
+		;i		n t e u c l i d e s _ m d c ( i n t m, i n t n )
+		;		{
+		;		if ( n ==0){
+		;
+		;		r e t u r n m;
+		;}
+		;		r e t u r n   e u c l i d e s _ m d c ( n , m % n ) ;
+		;}
+		;e		salve o resultado na mem√≥ria de dados.
+		;==================================================================================================================================================
+		
+		;		Defini√ß√£o do algoritmo de Euclides para calcular o MDC entre dois n√∫meros inteiros m e n
+		;		onde 0 ‚â§ n < m
+		;		Par√¢metros de entrada:
+		;		R0: Valor de m
+		;		R1: Valor de n
+		;		Retorno:
+		;		R0: Resultado do MDC
+		;==============================================================================
+		mov		R2, #0        ; Inicializa R2 como zero ---(contador)
+		mov		R3, #0         ; Inicializa R3 como zero --- (vari√°vel tempor√°ria)
+		;		Verifica se n == 0
+		cmp		R1, #0
+		beq		fim             ; Se n == 0, retorna m e fim
+		
+		;		Loop l√≥gica  de Euclides --> N√ÉO CHEGUEI NA L√ìGICA CORRETA
+loop2	subs		R3, R0, R1     ; Calcula m % n e armazena em R3
+		bge		loop2   ; Se R3 >= 0, continua o loop
+		mov		R0, R1         ; Atualiza m com o valor de n
+		mov		R1, R3         ; Atualiza n com o valor de m % n
+		b		loop2   ; Volta para o in√≠cio do loop
+		;		 retornaria o resultado do MDC em R0
+		
+fim		; Armazena o resultado MDCna mem√≥ria de dados
+		str		R0, [R4]       ; Salva o resultado (MDC) na mem√≥ria de dados
+
