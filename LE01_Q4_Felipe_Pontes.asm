@@ -1,32 +1,29 @@
-		;--------------Quest„o	4-----------
+		;--------------Quest√£o	4-----------
 		;[Felipe	Pontes] - - - - 26/04/24
-		;MultiplicaÁ„o	em baixo nÌvel:
-		;faÁa	um cÛdigo que calcule a multiplicaÁ„o entre dois n˙meros e salve a resposta na memÛria de dados.
+		;Multiplica√ß√£o	em baixo n√≠vel:
+		;fa√ßa	um c√≥digo que calcule a multiplica√ß√£o entre dois n√∫meros e salve a resposta na mem√≥ria de dados.
+		;================================================================================================================
+		;		Defini√ß√£o dos registradores e endere√ßos de mem√≥ria
+		;================================================================
+		mov		r1, #4      ; Multiplicador (aleat√≥rio)               |
+		mov		r2, #100       ; numero a ser multiplicado (aleatorio)|
+		;================================================================
 		
+		MOV		r0, #256      ; Endere√ßo inicial da mem√≥ria de dados
+		mov		r3, #0        ; contador
+		mov		r4, #0        ; p/ armazenar o resultado momentaneamente
 		
-		;		DefiniÁ„o dos registradores e endereÁos de memÛria
+		str		r1, [r0]      ; Salva o multiplicador no primeiro endere√ßo da mem√≥ria
+		str		r2, [r0, #4]  ; Salva o numero a ser multiplicado no segundo endere√ßo da mem√≥ria
 		
-		
-		;		carregar valores
-		MOV		r0, #256      ; EndereÁo inicial da memÛria de dados
-		mov		r1, #4      ; Multiplicador
-		mov		r2, #25       ; Multiplicando
-		mov		r3, #0        ; Vari·vel contadora de ciclos
-		mov		r4, #0        ; Vari·vel para armazenar o resultado parcial
-		
-		;		Salvar os valores na memÛria
-		str		r1, [r0]      ; Salva o multiplicador no primeiro endereÁo da memÛria
-		str		r2, [r0, #4]  ; Salva o multiplicando no segundo endereÁo da memÛria
-		
-loop
-		cmp		r3, r1        ; Compara o contador com o multiplicador
-		beq		loop1         ; Se atingir o multiplicador, vai para loop1
+loop		cmp		r3, r1        ; Compara o contador com o multiplicador
+		beq		loop1         ; Se atingir o multiplicador, vai para loop1 ; usando a ideia do c√≥digo exemplo do professor
 		add		r4, r4, r2    ; Adiciona o multiplicando ao resultado parcial
 		add		r3, r3, #1    ; Incrementa o contador
 		b		loop         ; Volta para loop
 		
 loop1
-		str		r4, [r0, #8]  ; Salva o resultado no terceiro endereÁo da memÛr
+		str		r4, [r0, #8]  ; Salva o resultado no terceiro endere√ßo da mem√≥r
 		
 		
 		
