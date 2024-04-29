@@ -1,41 +1,35 @@
-			;---------------------Quest„o	5---------------------
-			;[FELIPE	PONTES] ---- 27/04/2024
-			;Q5)		Reutilizando cÛdigo: faÁa um cÛdigo que calcula o fatorial de um n˙mero, para isso, rea-proveite o cÛdigo feito
-			;para	calcular a multiplicaÁ„o entre dois n˙mero. Salve o resultado na memÛria de dados.
-			;=============================================================================================
-			
-			
-			MOV		R0, #0x100     ; EndereÁo inicial da memÛria de dados
-			MOV		R1, #2       ; N˙mero para calcular o fatorial (exemplo: 5)
-			MOV		R4, #1         ; Inicializa o resultado com 1 (fatorial)
-			BL		fatorial       ; Chama a sub-rotina para calcular o fatorial
-			B		sair
-			
-fatorial
-			SUBS		R1, R1, #1     ; Decrementa o n˙mero (R1) em 1
-			BEQ		done           ; Se o n˙mero for 1, encerra o c·lculo do fatorial
-			BL		multiplica     ; Chama a sub-rotina para multiplicar R4 por R1
-			B		fatorial       ; Continua o loop para calcular o fatorial
-			
-multiplica
-			MOV		R2, R4         ; Move o valor acumulado do fatorial para R2
-			MOV		R3, R1         ; Move o n˙mero a ser decrementado para R3
-			MOV		R5, #0         ; Zera o registrador de resultado tempor·rio
-			
-loop_mul
-			ADD		R5, R5, R2     ; Adiciona o valor acumulado do fatorial ao resultado tempor·rio
-			SUBS		R3, R3, #1     ; Decrementa o n˙mero a ser decrementado
-			BNE		loop_mul       ; Se o n˙mero n„o for zero, continua o loop
-			MOV		R4, R5         ; Atualiza o resultado acumulado do fatorial
-			MOV		PC, LR         ; Retorna para a instruÁ„o que chamou a sub-rotina
-			
-done
-			;Armazena	o resultado (fatorial) na memÛria de dados
-			STR		R4, [R0, #0]   ; Salva o resultado (fatorial) na memÛria de dados
-			
-sair
-			
-			
-			
-			
-			;ESTOU	PERTO POIS O PROGRAMA EST¡ CALCULADNO SEMPRE O VALOR DE R1-1
+		;---------------------Quest√£o	5---------------------
+		;[FELIPE	PONTES] ---- 28/04/2024
+		;Q5)		Reutilizando c√≥digo: fa√ßa um c√≥digo que calcula o fatorial de um n√∫mero, para isso, rea-proveite o c√≥digo feito
+		;para	calcular a multiplica√ß√£o entre dois n√∫mero. Salve o resultado na mem√≥ria de dados.
+		;=============================================================================================
+		
+		
+		;=====================================================================
+		mov		r1, #5       ; escolha o n√∫mero para calcular o fatorial   |
+		;=====================================================================
+		
+		mov		r0, #0x100   ; endere√ßo inicial da mem√≥ria de dados
+		mov		r4, #1       ; inicializa o resultado com 1 (fatorial)
+		
+		;		Incrementa 1 ao n√∫mero do fatorial  -> pra corrigir minha falta de criatividade
+		add		r1, r1, #1
+		;		Decrementa o n√∫mero (r1) em 1
+fatorial	subs		r1, r1, #1
+		beq		fim           ; se o n√∫mero = 1, encerra aqui o c√°lculo pois ser√° 1
+		
+		;		Multiplica r4 * r1
+		mov		r2, r4         ; move o valor acumulado do fatorial para r2
+		mov		r3, r1         ; move o n√∫mero a ser decrementado para r3
+		mov		r5, #0         ; zera o registrador de resultado tempor√°rio
+		
+loop_mul	add		r5, r5, r2     ; adiciona o valor acumulado do fatorial no resultado tempor√°rio
+		subs		r3, r3, #1     ; decrementa o n√∫mero a ser decrementado
+		
+		;bne		"branch if not equali" ("desviar se n√£o for igual"
+		bne		loop_mul       ; se o n√∫mero n√£o for zero, continua o loop
+		
+		mov		r4, r5         ; atualiza o resultado acumulado do fatorial
+		b		fatorial
+		
+fim		str		r4, [r0, #0]   ; salva o resultado (fatorial) na mem√≥ria de dados
